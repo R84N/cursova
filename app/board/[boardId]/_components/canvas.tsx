@@ -12,11 +12,9 @@ interface CanvasProps {
 }
 
 const Canvas = ({ boardId }: CanvasProps) => {
-  const info = useSelf();
-
   return (
     <main className="h-full w-full relative bg-neutral-100 toch-none">
-      <Info />
+      <Info boardId={boardId} />
       <Participance />
       <Toolbar />
     </main>
