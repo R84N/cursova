@@ -36,16 +36,17 @@ const BoardCard = ({id,title,authorName,authorId,createdAt,imageUrl,orgId,isFavo
     addSuffix:true,
   });
 
-  const toggleFavorite:FormEventHandler<HTMLFormElement> = (e)=>{
+  const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if(isFavorite){
-      unfavorite({id:id as Id<"boards">})
-    }else{
-      favorite({id:id as Id<"boards">,orgId:orgId})
+  
+    if (isFavorite) {
+      unfavorite({ id: id as Id<"boards"> });
+    } else {
+      favorite({ id: id as Id<"boards">, orgId });
     }
-  }
+  };
+  
 
 
     return (

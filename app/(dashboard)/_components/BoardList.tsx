@@ -29,11 +29,11 @@ const BoardList = ({orgId, query}:BoardListProps) => {
             orgId: organization.id,
             title: "Untitled"
         })
-        .then((id)=>{
+        .then(()=>{
             toast.success("Board created")
         })
 
-        .catch((error)=>{
+        .catch(()=>{
             toast.error("Fail to create a board")
         })
     };
