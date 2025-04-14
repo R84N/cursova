@@ -5,7 +5,7 @@ import Info from "./info";
 import Participance from "./participance";
 import Toolbar from "./toolbar";
 import { nanoid } from "nanoid";
-import { useSelf, useStorage } from "@liveblocks/react";
+import {useStorage } from "@liveblocks/react";
 import { useState } from "react";
 import { camera, CanvasMode, CanvasState, Color, LayerType, Side, XYWH } from "@/types/canvas";
 import { useHistory, useCanUndo, useCanRedo, useMutation } from "@liveblocks/react";
@@ -13,7 +13,7 @@ import CursorPresence from "./CursorPresence";
 import { connectionIdToColor, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
 import { Point } from "@/types/canvas";
 import { LiveObject } from "@liveblocks/client";
-import { headers } from "next/headers";
+
 import LayerPreview from "./LayerPreview";
 import { useOthersMapped } from "@liveblocks/react";
 import SelectionBox from "./SelectionBox";

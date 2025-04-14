@@ -1,6 +1,6 @@
 "use client"
 
-import { icons, LucideIcon } from "lucide-react"
+import {  LucideIcon } from "lucide-react"
 
 import Hint from "@/components/hint"
 import { Button } from "@/components/ui/button"

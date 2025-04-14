@@ -8,7 +8,7 @@ import ColorPicker from "./ColorPicker";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { Button } from "@/components/ui/button";
 import Hint from "@/components/hint";
-import { BringToFront, Trash2, SendToBack } from "lucide-react";
+import { Trash2} from "lucide-react";
 
 interface SelectionToolsProps{
     camera: camera,

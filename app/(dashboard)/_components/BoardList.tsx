@@ -5,8 +5,6 @@ import { useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { useOrganization } from "@clerk/nextjs"
 import { toast } from "sonner"
-import { error } from "console"
-
 import { useQuery } from "convex/react"
 import BoardCard from "./board-card"
 import NewBoardButton from "./NewBoardButton"
