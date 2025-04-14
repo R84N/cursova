@@ -16,6 +16,7 @@ const eslintConfig = [
   {
     rules: {
       "react/display-name": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ];
