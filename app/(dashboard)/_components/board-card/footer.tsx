@@ -1,7 +1,7 @@
-import React, { FormEventHandler } from 'react'
+
 import { Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Id } from '@/convex/_generated/dataModel'
+
 
 interface FooterProps{
     title:string,

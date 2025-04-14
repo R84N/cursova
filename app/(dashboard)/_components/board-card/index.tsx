@@ -10,7 +10,6 @@ import Actions from "@/components/actions";
 import { MoreVertical } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { FormEventHandler } from "react";
 import { Id } from "@/convex/_generated/dataModel";
 
 interface BoardCardProps {

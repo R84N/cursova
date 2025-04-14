@@ -7,15 +7,14 @@ DropdownMenu,
 DropdownMenuTrigger, 
 DropdownMenuContent, 
 DropdownMenuItem, 
-DropdownMenuSeparator, 
 }
 from "@/components/ui/dropdown-menu";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { useOrganization } from "@clerk/nextjs";
+
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { v } from "convex/values";
+
 import { useRenameModal } from "@/store/use-rename-modal";
 import { Id } from "@/convex/_generated/dataModel";
 
@@ -75,8 +74,8 @@ const Actions = ({children,side,sideOffset,id,title}:DropdownMenuContentProps) =
             Delete
         </DropdownMenuItem> 
         <DropdownMenuItem 
-        //@ts-ignore
-        onClick={()=>onOpen(id,title)}
+
+        onClick={()=>onOpen(id!,title!)}
         className="p-3 cursor-pointer" 
         > 
         <Pencil className="h-4 w-4 mr-2" /> 
