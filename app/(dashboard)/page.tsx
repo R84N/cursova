@@ -1,4 +1,4 @@
-"use client"
+"use server"
 
 import React from "react";
 import EmptyOrg from "./_components/EmptyOrg";
