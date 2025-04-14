@@ -1,3 +1,6 @@
+"use server"
+
+
 import React from "react";
 import Canvas from "./_components/canvas";
 import Room from "@/components/room";
