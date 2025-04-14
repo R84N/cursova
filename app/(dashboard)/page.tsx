@@ -7,10 +7,7 @@ import BoardList from "./_components/BoardList";
 
 
 interface DashboardPageProps  {
-  searchParams:{
-    search?:string,
-    favorites?:string
-  }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 const DashboardPage = ({searchParams}:DashboardPageProps) => {
