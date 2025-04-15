@@ -1,37 +1,42 @@
-"use client"
+"use client";
 
 import { LayerType } from "@/types/canvas";
 import { useStorage } from "@liveblocks/react";
 import { memo } from "react";
 import Rectangle from "./rectangle";
-
+import Ellipse from "./ellipce";
+import Text from "./text";
+import Note from "./note";
 interface LayerPreviewProps {
-    id:string,
-    onLayerPointerDown:(e: React.PointerEvent, layerId:string) =>void;
-    selectionColor?:string
+  id: string;
+  onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
+  selectionColor?: string;
 }
 
-const LayerPreview = memo(({id, onLayerPointerDown,selectionColor}:LayerPreviewProps) => {
+const LayerPreview = memo(({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
+  const layer = useStorage((root) => root.layers.get(id));
 
-    const layer = useStorage((root)=>root.layers.get(id));
+  if (!layer) {
+    return null;
+  }
 
-    if(!layer){
-        return null
-    }
+  switch (layer.type) {
+    case LayerType.Note:
+      return <Note id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
 
-    switch (layer.type) {
+    case LayerType.Text:
+      return <Text id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
 
+    case LayerType.Ellipse:
+      return <Ellipse id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
 
-        case LayerType.Rectangle:
-            return(
-                <Rectangle id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor}/>
-            )
+    case LayerType.Rectangle:
+      return <Rectangle id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
 
-        
-        default:
-            //console.warn("Unknown layer type")
-            return null
-    }
-})
+    default:
+      //console.warn("Unknown layer type")
+      return null;
+  }
+});
 
-export default LayerPreview
+export default LayerPreview;
