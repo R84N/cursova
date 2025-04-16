@@ -11,7 +11,9 @@ interface PathProps {
 
 const Path = ({x,y,points,fill,onPointerDown,stroke}:PathProps) =>{
  return(
-    <></>
+    <path 
+    
+    />
  )
 }
 
