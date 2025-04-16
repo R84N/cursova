@@ -13,7 +13,9 @@ const Room = ({ children, roomId }: { children: ReactNode; roomId: string }) => 
       <RoomProvider id={roomId} 
       initialPresence={{
         cursor:null,
-        selection:[]
+        selection:[],
+        pencilDraft:null,
+        penColor: null
         }}
 
       initialStorage={{
