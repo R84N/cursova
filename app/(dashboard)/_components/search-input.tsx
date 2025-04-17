@@ -1,5 +1,9 @@
 "use client"
 
+// Компонент пошуку дошок
+
+//Імпортуємо всі необхідні функції/Компоненти
+
 import qs from "query-string"
 import { Search } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -9,14 +13,26 @@ import { Input } from "@/components/ui/input"
 
 const SearcInput = () => {
 
+    // Створюємо реактивну змінну для зберігання данних інпута
+
     const [value, setValue] = useState("");
+
+    // Створюємо можливість керувати роутами
+
     const router = useRouter()
+
+    // Функція, яка записує інформацію з інпута в нашу змінну
 
     const handleChange = (e:ChangeEvent<HTMLInputElement>) =>{
         setValue(e.target.value);
     }
 
+    // Логіка, яка реагує на зміну данних в value
+
     useEffect(()=>{
+
+        // Створюємо посилання, в якому будуть зазначені данні з value
+
         const url = qs.stringifyUrl({
             url:"/",
             query:{
@@ -25,6 +41,8 @@ const SearcInput = () => {
 
         },{skipEmptyString:true, skipNull:true})
 
+        // Переходимо на це посилання
+
         router.push(url)
 
     },[value])
@@ -32,7 +50,7 @@ const SearcInput = () => {
   return (
     <div className="w-full relative">
         <Search className="absolute top-1/2 left-3 transform -translate-y-1/2 text-muted-foreground h-4 w-4"/>
-        <Input className="w-full max-w-[516px] pl-9" placeholder="Search boards" onChange={handleChange}/>
+        <Input className="w-full max-w-[516px] pl-9" placeholder="Знайти дошку" onChange={handleChange}/>
     </div>
   )
 }

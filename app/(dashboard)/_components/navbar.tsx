@@ -1,5 +1,9 @@
 "use client";
 
+// Компонент навігаційного меню
+
+// Імпортуємо всі необхідні залежності
+
 import { UserButton } from "@clerk/nextjs";
 import SearcInput from "./search-input";
 

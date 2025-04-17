@@ -1,19 +1,33 @@
 "use client"
 
+// Компонент для створення нової дошки 
+
+// Імпортуємо залежності
+
 import { Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 
+
+// Типізуємо пропси
 interface NewBoardButtonProps{
     orgId:string,
     disabled?:boolean,
 
 }
 
+
+
 const NewBoardButton = ({orgId,disabled}:NewBoardButtonProps) => {
+
+    // Отримуємо функцію для створення дошки
+
     const create = useMutation(api.board.create); 
+
+    // При натиску на компонент створюємо нову дошку в організації
+
     const onClick = () => { 
         create({ 
         orgId, 
@@ -32,7 +46,7 @@ const NewBoardButton = ({orgId,disabled}:NewBoardButtonProps) => {
         <div /> 
         <Plus className="h-12 w-12 text-white stroke-1"/>
         <p className="text-sm text-white font-light">
-            New board
+            Створити дошку
         </p> 
     </button>
   )

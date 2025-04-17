@@ -64,14 +64,14 @@ const Actions = ({children,side,sideOffset,id,title}:DropdownMenuContentProps) =
         className="p-3 cursor-pointer" 
         > 
         <Link2 className="h-4 w-4 mr-2" /> 
-        Copy board link 
+        Скопіювати посилання
         </DropdownMenuItem> 
         <DropdownMenuItem 
         onClick={onDelete}
         className="p-3 cursor-pointer" 
         > 
         <Trash2 className="h-4 w-4 mr-2" /> 
-            Delete
+            Видалити
         </DropdownMenuItem> 
         <DropdownMenuItem 
 
@@ -79,7 +79,7 @@ const Actions = ({children,side,sideOffset,id,title}:DropdownMenuContentProps) =
         className="p-3 cursor-pointer" 
         > 
         <Pencil className="h-4 w-4 mr-2" /> 
-        Rename 
+        Перейменувати 
         </DropdownMenuItem> 
     </DropdownMenuContent> 
     </DropdownMenu>

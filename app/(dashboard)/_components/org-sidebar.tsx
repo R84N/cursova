@@ -1,5 +1,9 @@
 "use client";
 
+// Компонент 2-гої бічної панелі на сторінці дошок
+
+// Імпортуємо залежності
+
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -9,12 +13,16 @@ import { Button } from "@/components/ui/button";
 import { LayoutDashboard, Star } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
+// Налаштування шрифта
+
 const font = Poppins({
   subsets: ["latin"],
   weight: ["600"],
 });
 
 const OrgSidebar = () => {
+
+  // Отримуємо посилання, та перевіряємо, чи зараз потрібно показувати улюблені дошки
 
   const searchParams = useSearchParams();
   const favorites = searchParams.get("favorites");
@@ -30,34 +38,40 @@ const OrgSidebar = () => {
         </div>
       </Link>
       <OrganizationSwitcher
-      hidePersonal
-        appearance={{
-          elements: {
-            rootBox: {
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
+          hidePersonal
+          appearance={{
+            elements: {
+              rootBox: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              },
+              organizationSwitcherTrigger: {
+                padding: "6px",
+                width: "100%",
+                borderRadius: "8px",
+                border: "1px solid #E5E7EB",
+                justifyContent: "space-between",
+                backgroundColor: "white",
+              },
             },
+          }}
 
-            organizationSwitcherTrigger: {
-              padding: "6px",
-              width: "100%",
-              borderRadius: "8px",
-              border: "1px solid #E5E7EB",
-              justifyContent: "space-between",
-              backgroundColor: "white",
-            },
-          },
-        }}
-      />
+        />
+ 
       <div className="space-y-1 w-full">
+
+          {/* Показуємо всі дошки якщо favorites false */}
+
         <Button asChild size='lg' className="font-normal justify-start px-2 w-full" variant={favorites?"ghost":"secondary"}>
           <Link href='/'>
             <LayoutDashboard  className="h-4 w-4 mr-2"/>
-            Team Boards
+            Всі дошки
           </Link>
         </Button>
+
+          {/* Показуємо улюблені дошки, якщо favorites true */}
 
         <Button asChild size='lg' className="font-normal justify-start px-2 w-full" variant={favorites?"secondary":"ghost"}>
           <Link href={{
@@ -65,7 +79,7 @@ const OrgSidebar = () => {
               query:{favorites:true}
           }}>
             <Star  className="h-4 w-4 mr-2"/>
-            Favorite Boards
+            Улюблені
           </Link>
         </Button>
       </div>
