@@ -5,12 +5,12 @@ import Info from "./info";
 import Participance from "./participance";
 import Toolbar from "./toolbar";
 import { nanoid } from "nanoid";
-import {useStorage } from "@liveblocks/react";
+import {useSelf, useStorage } from "@liveblocks/react";
 import { useState } from "react";
 import { camera, CanvasMode, CanvasState, Color, LayerType, Side, XYWH } from "@/types/canvas";
 import { useHistory, useCanUndo, useCanRedo, useMutation } from "@liveblocks/react";
 import CursorPresence from "./CursorPresence";
-import { connectionIdToColor, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
+import { colorToCss, connectionIdToColor, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
 import { Point } from "@/types/canvas";
 import { LiveObject } from "@liveblocks/client";
 
@@ -18,6 +18,7 @@ import LayerPreview from "./LayerPreview";
 import { useOthersMapped } from "@liveblocks/react";
 import SelectionBox from "./SelectionBox";
 import SelectionTools from "./SelectionTools";
+import Path from "./path";
 
 // максимальна кількість об'єктів на дошці
 
@@ -34,6 +35,8 @@ const Canvas = ({ boardId }: CanvasProps) => {
   // отримуємо id об'єкті дошки
 
   const layerIds = useStorage((root)=>root.layerIds)
+
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft)
 
   // стан меню інструментів ( Змінюючи цей параметри буде пееключатись меню. Наприклад, якщо вибрати  CanvasMode.Rectangle включиться квадрат)
 
@@ -358,6 +361,14 @@ const Canvas = ({ boardId }: CanvasProps) => {
               onReziHandlePointerDown={onResizedPointerDown}
             />
             <CursorPresence />
+            {pencilDraft != null && pencilDraft.length >0 &&(
+              <Path 
+              points={pencilDraft}
+              fill={colorToCss(lastUsedColor)}
+              x={0}
+              y={0}
+              />
+            ) }
           </g>
         </svg>
       </main>
