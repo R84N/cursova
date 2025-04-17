@@ -1,8 +1,11 @@
+// Нижня частина компонента карти-дошки
+
+// Імпортуємо всі залежності
 
 import { Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-
+// Типізуємо пропси
 interface FooterProps{
     title:string,
     authorLabel:string,

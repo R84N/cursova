@@ -1,3 +1,7 @@
+// Перше бічне меню на сторінці з дошками
+
+// Імпортуємо всі необхідні залежності 
+
 import React from "react";
 import NewButton from "./new-button";
 import List from "./list";

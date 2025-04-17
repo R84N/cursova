@@ -1,16 +1,23 @@
 "use client";
 
+// Компонент списку організацій
+
 import { useOrganizationList } from "@clerk/nextjs";
 
 import React from "react";
 import Item from "./item";
 
 const List = () => {
+
+  // Отримуємо організації, в яких ми знаходимся
+
   const { userMemberships } = useOrganizationList({
     userMemberships: {
       infinite: true,
     },
   });
+
+  // Якщо нема організацій, повертаємо
 
   if (!userMemberships.data?.length) return null;
 

@@ -1,4 +1,9 @@
 "use client";
+
+// Компонент для створеня нової організації
+
+// Імпортуємо всі залежності
+
 import { Plus } from "lucide-react";
 import { CreateOrganization } from "@clerk/nextjs";
 

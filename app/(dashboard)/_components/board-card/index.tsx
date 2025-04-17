@@ -1,5 +1,9 @@
 "use client";
 
+// Компонент карточки дошки
+
+// Імпортуємо залежності 
+
 import Image from "next/image";
 import Link from "next/link";
 import Overlay from "./overlay";
@@ -12,6 +16,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 
+// Типізуємо пропси 
 interface BoardCardProps {
     id:string,
     title:string,
@@ -25,15 +30,26 @@ interface BoardCardProps {
 
 const BoardCard = ({id,title,authorName,authorId,createdAt,imageUrl,orgId,isFavorite}:BoardCardProps) => {
 
+  // Отримємо функції для того, щоб додати/забрати дошку з улюблених
+
   const favorite = useMutation(api.board.favorite);
   const unfavorite = useMutation(api.board.unfavorite);
 
+  // Отримуємо id юзера
+
   const {userId} = useAuth();
 
-  const authorLabel = userId === authorId?"You":authorName;
+  // Отримуємо автора дошки
+
+  const authorLabel = userId === authorId?"Ви":authorName;
+
+  // Отримуємо дату створення дошки 
+
   const createdAtLabel = formatDistanceToNow(createdAt,{
     addSuffix:true,
   });
+
+  // Функція, яка додає/забирає користувача з улюблених
 
   const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

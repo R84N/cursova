@@ -1,25 +1,40 @@
 "use client";
 
+// Компонент іконки організації
+
+// Імпортуємо всі необхідні залежності 
+
 import Image from "next/image";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import Hint from "@/components/hint";
 
+// Типізуємо пропси
 interface ItemProps {
   id: string;
   name: string;
   imageUrl: string;
 }
 
-import React from "react";
-import Hint from "@/components/hint";
+
 
 const Item = ({ id, name, imageUrl }: ItemProps) => {
+
+  // Отримуємо організацію, функцію для того, щоб зробити її активною
+
   const { organization } = useOrganization();
   const { setActive } = useOrganizationList();
 
+  // Булева змінна, яка містить інформацію про активність дошки
+
   const isActive = organization?.id === id;
 
+  // Функція для активації організації
+
   const onClick = () => {
+
+    // Якщо функції нема, повертаємо 
+
     if (!setActive) return;
 
     setActive({ organization: id });
