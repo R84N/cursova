@@ -1,5 +1,9 @@
 "use client"
 
+// Компонент опцій дошки
+
+// Імпортуємо залежності 
+
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 
 import {
@@ -18,7 +22,7 @@ import { api } from "@/convex/_generated/api";
 import { useRenameModal } from "@/store/use-rename-modal";
 import { Id } from "@/convex/_generated/dataModel";
 
-
+// типізуємо залежності 
 interface ActionsProps { 
     children: React. ReactNode; 
     side?: DropdownMenuContentProps ["side"]; 
@@ -28,11 +32,12 @@ interface ActionsProps {
 };
 
 const Actions = ({children,side,sideOffset,id,title}:DropdownMenuContentProps) => {
+
+    // Отримуємо данні про попап з сховища
     
     const {onOpen} = useRenameModal();
 
-    
-    
+    // ФУнкція для копіювання посилання на дошку
     
     const onCopyLink = () => { 
         navigator.clipboard.writeText( 
@@ -40,11 +45,15 @@ const Actions = ({children,side,sideOffset,id,title}:DropdownMenuContentProps) =
         ) 
         .then(() => toast.success("Link copied")) 
         .catch(() => toast.error("Failed to copy link")) 
-        }
+    }
 
-        const remove = useMutation(api.board.remove);
+    // Отримуємо можливічть видалити дошку 
+
+    const remove = useMutation(api.board.remove);
+
+    // Функція видалення дошки
     
-        const onDelete = ()=>{
+    const onDelete = ()=>{
             remove({id:id as Id<"boards">})
             .then(()=>toast.success("Boared deleted"))
             .catch(()=>toast.error("Failed to delete board"))

@@ -1,28 +1,42 @@
 "use client"
 
+// Компонент відповідаючий за сітку навколо фігури при натисканні 
+
+// Імпоотуємо залежності 
+
 import { useSelectionBounds } from "@/hooks/use-selection-bounce"
 import { LayerType, Side, XYWH } from "@/types/canvas"
 import { useSelf, useStorage } from "@liveblocks/react"
 import { memo } from "react"
 
+// Типізуємо пропси 
 interface SelectionBoxProps{
     onReziHandlePointerDown:(corner:Side, initialBounds:XYWH)=>void,
 }
+
+// Висота і ширина квадратиків 
 
 const HANDLE_WIDTH = 8
 
 const SelectionBox = memo(({onReziHandlePointerDown}:SelectionBoxProps) => {
 
+    // Отримуємо ID одного шару, якщо в користувача виділено лише один шар
+
     const soleLayerId = useSelf((me)=>
         me.presence.selection.length === 1 ? me.presence.selection[0] : null
     )
+
+    // Визначаємо, чи показувати "handles" (керуючі точки або маніпулятори)
 
     const isShowingHandles = useStorage((root)=>
     soleLayerId && root.layers.get(soleLayerId)?.type !== LayerType.Path
     )
 
+    // Отримуємо параметри прямокутника, що обгортає фігуру
+
     const bounds = useSelectionBounds();
 
+    // Якщо параметрів немає, то повертаємо
 
     if(!bounds){
         return null
@@ -36,9 +50,7 @@ const SelectionBox = memo(({onReziHandlePointerDown}:SelectionBoxProps) => {
             x={0}
             y={0}
             width={bounds.width}
-            height={bounds.height} // ← до речі, тут у тебе було `hight` — помилка в написанні
-
-            
+            height={bounds.height} 
         />
 
 {isShowingHandles&& (

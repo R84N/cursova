@@ -1,5 +1,9 @@
 "use client";
 
+// Компонент відповідаючий за вибір елемента на дошці (коло, квадрат, олівець)
+
+// Імпортуємо залежності
+
 import { LayerType } from "@/types/canvas";
 import { useStorage } from "@liveblocks/react";
 import { memo } from "react";
@@ -9,6 +13,8 @@ import Text from "./text";
 import Note from "./note";
 import Path from "./path";
 import { colorToCss } from "@/lib/utils";
+
+// Типізуємо пропси 
 interface LayerPreviewProps {
   id: string;
   onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
@@ -16,11 +22,18 @@ interface LayerPreviewProps {
 }
 
 const LayerPreview = memo(({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
+
+  // Отримуємо інформацію про вибраний елемент
+
   const layer = useStorage((root) => root.layers.get(id));
+
+  // Якщо нема інформації, повертаємо
 
   if (!layer) {
     return null;
   }
+
+  // В залежності від обраного типу вкористовуємо відповідний елемент
 
   switch (layer.type) {
 
@@ -50,7 +63,6 @@ const LayerPreview = memo(({ id, onLayerPointerDown, selectionColor }: LayerPrev
       return <Rectangle id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
 
     default:
-      //console.warn("Unknown layer type")
       return null;
   }
 });

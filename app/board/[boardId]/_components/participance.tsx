@@ -1,14 +1,28 @@
 "use client"
 
+// Компонент для відображення користувачів, які зараз знаходяться на дошці 
+
+// Імпортуємо залежності
+
 import UserAvatar from "./user-avatar"
 import { useOthers, useSelf } from "@liveblocks/react"
+
+// Число яке відповідає за те, скільки користувачів відображено на дошці
 
 const MAX_SHOWN_USERS = 2
 
 const Participance = () => {
 
+  // Отримуємо користувачів на дошці
+
   const users = useOthers();
+
+  // Отримуємо себе
+
   const currentUser = useSelf();
+
+  // Булева змінна яка вказує чим кількість користувачів на дошці більша за MAX_SHOWN_USERS
+
   const hasMoreUsers = users.length > MAX_SHOWN_USERS
 
   return (

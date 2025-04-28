@@ -1,44 +1,51 @@
 "use client"
 
+// Компонент відображення присутності курсорів інших користувачів
+
+// Імпортуємо залежності
 import { memo } from "react"
 import { shallow, useOthersConnectionIds, useOthersMapped } from "@liveblocks/react"
 import Cursor from "./cursor";
 import Path from "./path";
 import { colorToCss } from "@/lib/utils";
 
-
-const Cursors = () =>{
+// Компонент, що рендерить курсори інших користувачів
+const Cursors = () => {
+    // Отримуємо ID з'єднань інших користувачів
     const ids = useOthersConnectionIds();
 
-    return(
+    return (
         <>
-        {ids.map((connectionId)=>(
-            <Cursor 
-                key={connectionId}
-                connectionId={connectionId}
-            />
-        ))}
+            {ids.map((connectionId) => (
+                <Cursor 
+                    key={connectionId}
+                    connectionId={connectionId}
+                />
+            ))}
         </>
     )
 }
 
-const Drafts = () =>{
-  const others = useOthersMapped((other)=>({
-    pencilDraft:other.presence.pencilDraft,
+// Компонент, що рендерить чернетки малюнків інших користувачів
+const Drafts = () => {
+  // Отримуємо дані про чернетку та обраний колір пера для кожного користувача
+  const others = useOthersMapped((other) => ({
+    pencilDraft: other.presence.pencilDraft,
     penColor: other.presence.penColor,
   }), shallow)
 
   return (
     <>
-      {others.map(([Key,other])=>{
-        if(other.pencilDraft){
+      {others.map(([key, other]) => {
+        // Якщо є чернетка — рендеримо шлях (Path)
+        if (other.pencilDraft) {
           return (
             <Path 
-            key={Key}
-            x={0}
-            y={0}
-            points={other.pencilDraft}
-            fill={other.penColor ? colorToCss(other.penColor): "#000"}
+              key={key}
+              x={0}
+              y={0}
+              points={other.pencilDraft}
+              fill={other.penColor ? colorToCss(other.penColor) : "#000"}
             />
           )
         }
@@ -49,16 +56,14 @@ const Drafts = () =>{
   )
 }
 
+// Головний компонент присутності курсорів та чернеток малюнків
 export const CursorPresence = memo(() => {  
   return (
     <>
       <Drafts />
       <Cursors />
     </>
-    
   )
 })
-
-
 
 export default CursorPresence

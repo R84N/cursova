@@ -1,12 +1,19 @@
 "use client"
 
+// Компонент меню вибору кольору 
+
+// Імпортуємо залежності 
+
 import { colorToCss } from '@/lib/utils'
 import { Color } from '@/types/canvas'
 import React from 'react'
 
+// Типізуємо пропси 
 interface ColorPickerProps{
     onChange: (color:Color) => void
 }
+
+
 
 const ColorPicker = ({ onChange }: ColorPickerProps) => {
 
@@ -26,11 +33,13 @@ const ColorPicker = ({ onChange }: ColorPickerProps) => {
 
 export default ColorPicker
 
+// Пропси для кнопки вибору кольору 
 interface ColorButtonProps { 
     onClick: (color:Color) => void
     color: Color; 
 }; 
-    
+
+// Кнопка для меню вибору кольору
     
 const ColorButton = ({ onClick, color}: ColorButtonProps) => { 
     return(

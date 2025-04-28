@@ -1,3 +1,6 @@
+// Цей файл відповідає за кастомні типи для ts
+
+
 export type Color ={
     r: number,
     g:number,

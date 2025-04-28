@@ -1,4 +1,9 @@
 "use client";
+
+// Компонент інформації про дошку 
+
+// Імпортуємо залежності 
+
 import Link from "next/link";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -9,9 +14,12 @@ import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
 import Hint from "@/components/hint";
 
+// Типізуємо пропси 
 interface InfoProps {
   boardId: string;
 }
+
+// Імпортуємо шрифти 
 
 const font = Poppins({
   subsets: ["latin"],
@@ -19,6 +27,9 @@ const font = Poppins({
 });
 
 const Info = ({ boardId }: InfoProps) => {
+
+  // Отримуємо дату про дошку 
+
   const data = useQuery(api.board.get, {
     id: boardId as Id<"boards">,
   });

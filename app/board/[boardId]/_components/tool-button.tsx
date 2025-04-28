@@ -1,10 +1,14 @@
 "use client"
 
-import {  LucideIcon } from "lucide-react"
+// Компонент кнопки вибору фігури на дошці 
 
+// Імпортуємо залежності 
+
+import {  LucideIcon } from "lucide-react"
 import Hint from "@/components/hint"
 import { Button } from "@/components/ui/button"
 
+// Типізуємо пропси 
 interface ToolButtonProps {
     label:string,
     icon: LucideIcon,
@@ -12,8 +16,6 @@ interface ToolButtonProps {
     isActive?:boolean,
     isDisabled?:boolean
 }
-
-import React from 'react'
 
 const ToolButton = ({label,icon:Icon,onClick,isActive,isDisabled}:ToolButtonProps) => {
   return (

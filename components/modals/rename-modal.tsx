@@ -1,5 +1,9 @@
 "use client"
 
+// Компонент перейменування дошки
+
+// Імпортуємо залежності 
+
 import { 
     Dialog, 
     DialogContent, 
@@ -22,15 +26,25 @@ import { Id } from "@/convex/_generated/dataModel";
 
 const RenameModal = () => {
 
+    // Отримаємо функцію для оновлення
+
     const update = useMutation(api.board.update);
+
+    // Отримуємо данні з сховища для попапа     
 
     const {isOpen, onClose, initialValues} = useRenameModal();
 
+    // Створюємо реактивну змінну для імені дошки
 
     const [title, setTitle] = useState(initialValues.title)
+
+// Коли оновлюється початкове значення імені дошки, оновлюємо нашу змінну
+
 useEffect(()=>{
     setTitle(initialValues.title);
 },[initialValues.title]);
+
+// Функція відправки запиту на перейменування дошки
 
 const Submit:FormEventHandler<HTMLFormElement> = (e)=> {
     e.preventDefault();

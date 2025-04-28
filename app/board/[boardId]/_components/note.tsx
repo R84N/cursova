@@ -1,14 +1,21 @@
+// Компонент записки 
+
+// Імпортуємо залежності 
+
 import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import { NoteLayer } from "@/types/canvas";
 import { cn, colorToCss, getContrastingTextColor } from "@/lib/utils";
 import { useMutation } from "@liveblocks/react";
-import { useState } from "react";
+
+// Імпортуємо шрифти 
 
 const font = Kalam({
   subsets: ["latin"],
   weight: ["400"],
 });
+
+// Функція для розрахування розміру шрифта в залежності від розміру записки
                 
 const calculateFontSie = (width: number, height: number) => {
   const maxFontSize = 96;
@@ -19,6 +26,7 @@ const calculateFontSie = (width: number, height: number) => {
   return Math.min(fontSizeBasedOnHeight, fontSizeBasedOnWidth, maxFontSize);
 };
 
+// Типізуємо пропси
 interface TextProps {
   id: string;
   layer: NoteLayer;
@@ -27,7 +35,13 @@ interface TextProps {
 }
 
 const Note = ({ layer, onPointerDown, id, selectionColor }: TextProps) => {
+
+  // Отримуємо данні про фігуру 
+
   const { x, y, width, height, fill, value } = layer;
+
+  // Функції для оновлення тексту в записці 
+
   const updateValue = useMutation(({ storage }, newValue: string) => {
     const liveLayers = storage.get("layers");
 

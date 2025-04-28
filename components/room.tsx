@@ -1,5 +1,9 @@
 "use client";
 
+// Компонент який потрібен для того, щоб створити "кімнату дошки"
+
+// Імпортуємо залежності  
+
 import { ReactNode } from "react";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { RoomProvider } from "@liveblocks/react";

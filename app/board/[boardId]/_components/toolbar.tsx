@@ -1,8 +1,13 @@
+// Компонент меню за кнопками вибору фігури на дошці
+
+// Імпортуємо залежності 
+
 import React from 'react'
 import ToolButton from './tool-button'
 import { Circle, MousePointer2, Pen, Redo2, Square, StickyNote, Type, Undo2 } from 'lucide-react'
 import { CanvasMode, CanvasState, LayerType } from '@/types/canvas'
 
+// Типізуємо пропси
 interface ToolbarProps {
     canvasState: CanvasState,
     setCanvasState: (newState:CanvasState)=>void,

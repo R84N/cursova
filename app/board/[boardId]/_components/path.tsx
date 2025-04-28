@@ -1,6 +1,12 @@
+// Компонент відповідає за олівець
+
+// Імпортуємо всі залежності 
+
+
 import { getSvgPathFromStroke } from "@/lib/utils";
 import getStroke from "perfect-freehand";
 
+// Типізуємо пропси
 interface PathProps {
     x:number,
     y: number,

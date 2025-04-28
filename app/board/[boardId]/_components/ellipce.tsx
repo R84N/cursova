@@ -1,6 +1,11 @@
+// Компонент кола/еліпса 
+
+// Імпортуємо залежності 
+
 import { colorToCss } from "@/lib/utils";
 import { EllipseLayer } from "@/types/canvas";
 
+// Типізуємо пропси 
 interface EllipseLayerProps {
   id: string;
   layer: EllipseLayer;

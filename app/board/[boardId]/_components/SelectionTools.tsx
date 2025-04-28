@@ -1,5 +1,9 @@
 "use client"
 
+// Компонент кнопок при натисканні на фігуру
+
+// Імпортуємо залежності 
+
 import { useSelectionBounds } from "@/hooks/use-selection-bounce";
 import { Color , camera } from "@/types/canvas"
 import { useMutation, useSelf } from "@liveblocks/react";
@@ -10,67 +14,98 @@ import { Button } from "@/components/ui/button";
 import Hint from "@/components/hint";
 import { BringToFront, SendToBack, Trash2} from "lucide-react";
 
+// Типізуємо пропси 
 interface SelectionToolsProps{
     camera: camera,
     setLastUsedColor: (color:Color) =>void;
 }
 
 const SelectionTools = memo(({camera, setLastUsedColor}:SelectionToolsProps) => {
+
+    // Отримуємо обраний елемент 
+
     const selection = useSelf((me)=> me.presence.selection )
 
-    const moveToBack = useMutation(({storage})=>{
-        const liveLayersIds = storage.get("layerIds");
-        const indices:number[] = [];
+    // Функція для переміщення вибраних фігур на задній план
+const moveToBack = useMutation(({ storage }) => {
+    // Отримуємо посилання на список усіх ID шарів (фігур)
+    const liveLayersIds = storage.get("layerIds");
 
-        const arr = liveLayersIds.toArray();
+    // Масив, у який зберігатимемо індекси вибраних фігур
+    const indices: number[] = [];
 
-        for(let i= 0; i<arr.length; i++){
-            if(selection?.includes(arr[i])){
-                indices.push(i);
-            }
+    // Копіюємо список ID у звичайний масив для зручності обробки
+    const arr = liveLayersIds.toArray();
+
+    // Знаходимо індекси всіх вибраних фігур у масиві
+    for (let i = 0; i < arr.length; i++) {
+        if (selection?.includes(arr[i])) {
+            indices.push(i);
         }
+    }
 
+    // Переміщаємо кожну вибрану фігуру на передній план свого блоку — у напрямку до початку списку
+    for (let i = 0; i < indices.length; i++) {
+        liveLayersIds.move(indices[i], i); // переміщуємо на позицію i (чим менше значення, тим глибше шар)
+    }
+}, [selection]);
 
-        for(let i = 0; i < indices.length; i++){
-            liveLayersIds.move(indices[i],i);
+// Функція для переміщення вибраних фігур на передній план
+const moveToFront = useMutation(({ storage }) => {
+    // Отримуємо список усіх ID шарів (фігур)
+    const liveLayersIds = storage.get("layerIds");
+
+    // Масив для зберігання індексів вибраних фігур
+    const indices: number[] = [];
+
+    // Копіюємо список ID у звичайний масив
+    const arr = liveLayersIds.toArray();
+
+    // Знаходимо індекси вибраних фігур
+    for (let i = 0; i < arr.length; i++) {
+        if (selection?.includes(arr[i])) {
+            indices.push(i);
         }
-    },[selection])
+    }
 
-    const moveToFront = useMutation(({storage})=>{
-        const liveLayersIds = storage.get("layerIds");
-        const indices:number[] = [];
+    // Переміщаємо вибрані фігури на кінець списку — тобто на передній план
+    // Робимо це у зворотному порядку, щоб уникнути конфліктів індексів при зміні порядку
+    for (let i = indices.length - 1; i >= 0; i--) {
+        liveLayersIds.move(indices[i], arr.length - 1 - i); // чим вище значення, тим "вище" фігура
+    }
+}, [selection]);
 
-        const arr = liveLayersIds.toArray();
+// Функція для встановлення кольору заливки (fill) для вибраних фігур
+const setFill = useMutation(({ storage }, fill: Color) => {
+    // Отримуємо всі шари (фігури), що зараз є на дошці
+    const liveLayers = storage.get("layers");
 
-        for(let i= 0; i<arr.length; i++){
-            if(selection?.includes(arr[i])){
-                indices.push(i);
-            }
-        }
+    // Запам'ятовуємо останній використаний колір (можливо, для повторного використання чи інтерфейсу)
+    setLastUsedColor(fill);
+
+    // Для кожної вибраної фігури:
+    selection?.forEach((id) => {
+        // Знаходимо фігуру за її ID та встановлюємо їй новий колір заливки
+        liveLayers.get(id)?.set("fill", fill);
+    });
+}, [selection, setLastUsedColor]);
 
 
-        for(let i = indices.length - 1; i >= 0; i++){
-            liveLayersIds.move(indices[i],arr.length - 1 - i);
-        }
-    },[selection])
-
-    const setFill = useMutation(({storage}, fill:Color)=>{
-        const liveLayers = storage.get("layers");
-        setLastUsedColor(fill);
-
-        selection?.forEach((id)=>{
-            liveLayers.get(id)?.set("fill", fill)
-        })
-    },[selection, setLastUsedColor])
-
+    // Видалення фігури 
 
     const deleteLayers = useDeleteLayers();
 
+    // От римуємо інформацію про фігуру, яка обертає фігуру при натиску 
+
     const selectionBounds = useSelectionBounds();
+
+    // Якщо інформації немає - повертаємо
 
     if(!selectionBounds) {
         return null
     }
+
+    // Вираховуємо кординати кнопок меню
 
     const x = selectionBounds.width / 2 + selectionBounds.x + camera.x;
     const y = selectionBounds.y + camera.y

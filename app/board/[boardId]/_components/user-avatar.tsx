@@ -1,3 +1,7 @@
+// Компонент аватара користувача
+
+// Імпортуємо залежності
+
 import Hint from "@/components/hint";
 
 import {
@@ -6,6 +10,7 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
+// Типізуємо пропси
 interface UserAvatarProps{
     src?:string,
     name?:string,

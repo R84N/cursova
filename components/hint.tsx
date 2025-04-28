@@ -1,3 +1,7 @@
+// Компонент підсказки
+
+// Імпортуємо залежності
+
 import {
   Tooltip,
   TooltipContent,
@@ -5,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+// Типізуємо пропси 
 export interface HintProps {
   label: string;
   children: React.ReactNode;

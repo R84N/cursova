@@ -1,14 +1,21 @@
+// Компонент відповідаючий за замітки
+
+//Імпортуємо залежності 
+
 import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import { TextLayer } from "@/types/canvas";
 import { cn, colorToCss } from "@/lib/utils";
 import { useMutation } from "@liveblocks/react";
-import { useState } from "react";
+
+// Налаштуваня шрифтів
 
 const font = Kalam({
   subsets: ["latin"],
   weight: ["400"],
 });
+
+// Функція для розрахунку розмірів шрифта
 
 const calculateFontSie = (width: number, height: number) => {
   const maxFontSize = 96;
@@ -19,6 +26,7 @@ const calculateFontSie = (width: number, height: number) => {
   return Math.min(fontSizeBasedOnHeight, fontSizeBasedOnWidth, maxFontSize);
 };
 
+// Типізуємо пропси
 interface TextProps {
   id: string;
   layer: TextLayer;
@@ -27,9 +35,20 @@ interface TextProps {
 }
 
 const Text = ({ layer, onPointerDown, id, selectionColor }: TextProps) => {
+
+  // Отримуємо данні про фігуру 
+
   const { x, y, width, height, fill, value } = layer;
+
+  // Функція для зміни текста 
+
   const updateValue = useMutation(({ storage }, newValue: string) => {
+
+    // Отримуємо нотатки
+
     const liveLayers = storage.get("layers");
+
+    // Отримуємо наш нотаток, та перезаписуємо в ньому текст 
 
     liveLayers.get(id)?.set("value", newValue);
   }, []);

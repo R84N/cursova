@@ -1,5 +1,9 @@
 "use client";
 
+// Основний компонент дошки
+
+// Імпортуємо залежності
+
 import React, { useCallback, useMemo } from "react";
 import Info from "./info";
 import Participance from "./participance";

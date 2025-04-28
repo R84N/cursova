@@ -1,6 +1,11 @@
+// Компонент квадрата/прямокутника
+
+// Імпортуємо залежності 
+
 import { RectangleLayer } from "@/types/canvas"
 import { colorToCss } from "@/lib/utils";
 
+// Типізуємо пропси
 interface RectangleProps { 
     id: string; 
     layer: RectangleLayer; 
@@ -9,6 +14,9 @@ interface RectangleProps {
     };
 
 const Rectangle = ({id,layer,onPointerDown,selectionColor}:RectangleProps) => {
+
+    // Отримуємо інформацію про фігуру
+
     const {x,y, width,height,fill} = layer
 
 
